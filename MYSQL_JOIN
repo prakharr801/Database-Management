@@ -64,7 +64,7 @@ select e.emp_id,e.emp_name,e.department_id,d.department_name from employees e in
 select d.department_id, count(e.emp_id) as total_employees from employees e inner join Departments d on e.department_id = d.department_id group by d.department_id;
 
 #13.Get the list of departments with more than one employee. 
-select d.department_id, count(e.emp_id) as total_employees from employees e inner join 
+select d.department_id, count(e.emp_id) as total_employees from employees e inner join
 Departments d on e.department_id = d.department_id group by d.department_id having count(e.emp_id)>1;
 
 
