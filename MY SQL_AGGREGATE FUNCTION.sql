@@ -33,7 +33,7 @@ select ProductID,sum(Quantity) as total_quan from Sales group by ProductID;
 select SaleID,Region,ProductID,avg(Quantity)as average_product_sold from Sales group by SaleID,Region,ProductID;
 
 #7.	Find the product IDs that have generated a total sales amount of more than 1000.
-select ProductID from Sales where (Quantity*UnitPrice)> 1000;
+select ProductID,sum(Quantity*UnitPrice) as total_sale from sales group by ProductID having total_sale>1000;
 
 #8.	Write a query to get the total number of sales (rows) made for each customer.
  select CustomerID, count(SaleID) AS total_sales from Sales group by CustomerID;
