@@ -1,5 +1,5 @@
-create database sub;
-use sub;
+create database venom;
+use venom;
 
 create table employees(
     emp_id int not null primary key,
@@ -8,7 +8,10 @@ create table employees(
     salary int not null
     );
     
-insert into employees(emp_id,name,department,salary) values(1,"john","hr",5000),(2,"alice","it",7000),(3,"bob","finance",6000),(4,"eve","it",8000),
+insert into employees(emp_id,name,department,salary) values(1,"john","hr",5000),
+(2,"alice","it",7000),
+(3,"bob","finance",6000),
+(4,"eve","it",8000),
 (5,"charlie","finance",7500);
 
 create table departments(
@@ -20,7 +23,8 @@ insert into departments(dept_id,dept_name) values(1,"hr"),(2,"it"),(3,"finance")
 
 #1. Find employees with salaries greater than the average salary of all employees. 
 
-select name from employees where emp_id =(select emp_id from employees group by emp_id order by avg(salary) desc limit 1);
+select name from employees where emp_id =(select emp_id 
+from employees group by emp_id order by avg(salary) desc limit 1);
 
 #2. Find employees whose salary is higher than the salary of 'Alice'. 
 
@@ -28,7 +32,8 @@ select name from employees where salary>(select salary from employees  where nam
 
 #3.List employees who belong to a department that has the name 'IT'.
 
-select name from employees where emp_id in(select emp_id from employees where department = "it");
+select name from employees where emp_id in(select 
+emp_id from employees where department = "it");
 
 #4. Get the names of employees who earn the highest salary in their department. 
 
@@ -44,15 +49,18 @@ select name from employees where emp_id not in ( select dept_id from departments
 
 #7. Find the second-highest salary among employees.
 
-select name,salary from employees where emp_id =(select emp_id from employees group by emp_id order by salary desc limit 1 offset 1);
+select name,salary from employees where emp_id =(select emp_id from 
+employees group by emp_id order by salary desc limit 1 offset 1);
 
 #8. Retrieve the names of employees who work in the department with the highest number of employees.
 
-select name from employees where salary in(select max(salary) as max_salary from employees group by department);
+select name from employees where salary in(select max(salary) as 
+max_salary from employees group by department);
 
 #9.Find employees who earn more than the average salary in their department. 
 
-select name, department, salary from employees e1 where salary > ( select avg(salary)from employees e2 where e2.department = e1.department);
+select name, department, salary from employees e1 where salary > 
+( select avg(salary)from employees e2 where e2.department = e1.department);
 
 #10. Retrieve employees whose salary is above 7000 and belong to departments in the departments table. 
 
@@ -68,7 +76,8 @@ select name from employees where salary in ( select salary from employees group 
 
 #13.Get the total salary of the department with the maximum total salary. 
 
-select department,sum(salary) as total_salary,max(salary) as max_salary from employees group by department having department in
+select department,sum(salary) as total_salary,max(salary) as 
+max_salary from employees group by department having department in
 (select department from employees);
 
 #14.Retrieve employees whose department has more than two employees. 
