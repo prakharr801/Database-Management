@@ -54,8 +54,8 @@ employees group by emp_id order by salary desc limit 1 offset 1);
 
 #8. Retrieve the names of employees who work in the department with the highest number of employees.
 
-select name from employees where salary in(select max(salary) as 
-max_salary from employees group by department);
+select name from employees where department in (select department from employees group by department having count(emp_id) = (
+select count(emp_id) from employees group by department order by count(emp_id) desc limit 1));
 
 #9.Find employees who earn more than the average salary in their department. 
 
